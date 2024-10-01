@@ -2,12 +2,11 @@ import mongodb from 'mongodb';
 // eslint-disable-next-line no-unused-vars
 import Collection from 'mongodb/lib/collection';
 import { existsSync, readFileSync } from 'fs';
-// import envLoader from './env_loader';
 
 /**
  * Loads the appropriate environment variables for an event.
  */
-const envLoader = () => {
+export const envLoader = () => {
   const env = process.env.npm_lifecycle_event || 'dev';
   const path = env.includes('test') || env.includes('cover') ? '.env.test' : '.env';
 
