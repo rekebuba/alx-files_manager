@@ -8,7 +8,7 @@ import {
 import AppController from '../controllers/AppController';
 import AuthController from '../controllers/AuthController';
 import UsersController from '../controllers/UsersController';
-// import FilesController from '../controllers/FilesController';
+import FilesController from '../controllers/FilesController';
 import { getUserFromXToken, getUserFromAuthorization } from '../utils/auth';
 
 /**
@@ -79,7 +79,7 @@ export const errorResponse = (err, req, res, next) => {
  * Injects routes with their handlers to the given Express application.
  * @param {Express} api
  */
-export const injectRoutes = (api) => {
+const injectRoutes = (api) => {
   api.get('/status', AppController.getStatus);
   api.get('/stats', AppController.getStats);
 
@@ -89,16 +89,16 @@ export const injectRoutes = (api) => {
   api.post('/users', UsersController.postNew);
   api.get('/users/me', xTokenAuthenticate, UsersController.getMe);
 
-  //   api.post('/files', xTokenAuthenticate, FilesController.postUpload);
-  //   api.get('/files/:id', xTokenAuthenticate, FilesController.getShow);
-  //   api.get('/files', xTokenAuthenticate, FilesController.getIndex);
-  //   api.put('/files/:id/publish', xTokenAuthenticate, FilesController.putPublish);
-  //   api.put(
-  //     '/files/:id/unpublish',
-  //     xTokenAuthenticate,
-  //     FilesController.putUnpublish,
-  //   );
-  //   api.get('/files/:id/data', FilesController.getFile);
+  api.post('/files', xTokenAuthenticate, FilesController.postUpload);
+  api.get('/files/:id', xTokenAuthenticate, FilesController.getShow);
+  api.get('/files', xTokenAuthenticate, FilesController.getIndex);
+  api.put('/files/:id/publish', xTokenAuthenticate, FilesController.putPublish);
+  api.put(
+    '/files/:id/unpublish',
+    xTokenAuthenticate,
+    FilesController.putUnpublish,
+  );
+  api.get('/files/:id/data', FilesController.getFile);
 
   api.all('*', (req, res, next) => {
     errorResponse(

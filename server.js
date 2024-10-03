@@ -1,6 +1,6 @@
 import express from 'express';
 import injectRoutes from './routes';
-import { envLoader } from './utils/db';
+import envLoader from './utils/envLoader';
 
 const server = express();
 
