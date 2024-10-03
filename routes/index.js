@@ -80,7 +80,7 @@ export const errorResponse = (err, req, res, next) => {
  * Injects routes with their handlers to the given Express application.
  * @param {Express} api
  */
-const injectRoutes = (api) => {
+export const injectRoutes = (api) => {
   api.get('/status', AppController.getStatus);
   api.get('/stats', AppController.getStats);
 
